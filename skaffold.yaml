@@ -22,7 +22,7 @@ deploy:
       ############################################
       #                prometheus                #
       ############################################
-      - name: "{{.SK_ENV_NAME}}-prometheus"
+      - name: "prometheus"
         remoteChart: prometheus-community/prometheus
         namespace: monitoring
         version: "{{.PROMETHEUS_HELM_VERSION}}"
