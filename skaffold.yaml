@@ -1,0 +1,31 @@
+apiVersion: skaffold/v4beta1
+kind: Config
+metadata:
+  name: common
+
+.common: &common
+  upgradeOnChange: true
+
+.common-values: &common-values
+  replicas: "1"
+  logLevel: "DEBUG"
+  lifecycle.preStop.exec.command:
+    - "sleep"
+    - '"10"'
+  image.repository: "nexuszolara.me"
+  imagePullSecrets:
+  - name: regcred-harbor
+
+deploy:
+  helm:
+    releases:
+      ############################################
+      #                prometheus                #
+      ############################################
+      - name: "{{.SK_ENV_NAME}}-prometheus"
+        remoteChart: prometheus-community/prometheus
+        namespace: monitoring
+        version: "{{.PROMETHEUS_HELM_VERSION}}"
+        valuesFiles:
+          - "{{ .SK_VALUES_PATH }}/prometheus.yaml"
+        <<: *common
