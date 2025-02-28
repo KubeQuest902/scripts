@@ -10,3 +10,8 @@ echo "Create secrets"
 
 echo "In namespace prometheus"
 kubectl create secret generic $prometheus_secret_name --from-file=password=$prometheus_secret_path -n monitoring --dry-run=client -oyaml | kubectl apply -f -
+
+echo "----------------------------------"
+echo "Add Helm repositories"
+
+helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
