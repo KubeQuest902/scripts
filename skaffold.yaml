@@ -22,8 +22,8 @@ deploy:
       ############################################
       #                prometheus                #
       ############################################
-      - name: "prometheus"
-        remoteChart: prometheus-community/prometheus
+      - name: "kube-prometheus"
+        remoteChart: prometheus-community/kube-prometheus-stack
         namespace: monitoring
         version: "{{.PROMETHEUS_HELM_VERSION}}"
         valuesFiles:
